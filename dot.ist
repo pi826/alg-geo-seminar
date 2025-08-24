@@ -1,0 +1,22 @@
+% myindex.ist
+% mendex用の索引スタイルファイル (dot.ist参考)
+
+preamble
+"\\begin{theindex}\n"
+postamble
+"\n\n\\end{theindex}\n"
+
+item_x0   "\n\\item "
+item_x1   "\n \\subitem "
+item_x2   "\n  \\subsubitem "
+
+delim_0   ", "
+delim_1   ", "
+delim_2   ", "
+
+% mendex用の設定
+lethead_prefix
+"\\hbox to \\linewidth{\\hfill\\sffamily\\bfseries\\gtfamily\\large "
+lethead_suffix
+"\\hfill}\\par\n\\nopagebreak\n"
+lethead_flag       1

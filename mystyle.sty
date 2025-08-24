@@ -1,0 +1,32 @@
+% mystyle.sty
+% 追加パッケージや個人用マクロを定義するスタイルファイル
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mystyle}[2024/07/26 Custom Style Package]
+
+% --- パッケージの読み込み ---
+\RequirePackage{graphicx}      % 図の挿入
+\RequirePackage{makeidx}       % 索引作成
+\RequirePackage{hyperref}      % PDFのハイパーリンク
+\RequirePackage{pxjahyper}     % hyperrefの日本語文字化け対策
+
+% --- 索引作成の有効化 ---
+% \makeindexコマンドをここで実行しておく
+% .texファイルに記述する必要がなくなる
+\makeindex
+
+% --- ここ以下に個人用のマクロなどを定義できます ---
+% 例: \newcommand{\Z}{\mathbb{Z}}
+% 例: \newcommand{\Q}{\mathbb{Q}}
+% 例: \newcommand{\Spec}{\mathrm{Spec}\,}
+
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\A}{\mathbf{A}}
+\newcommand{\GL}{\mathrm{GL}}
+
+
+
+\endinput

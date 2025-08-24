@@ -1,0 +1,171 @@
+% main.tex
+% 代数幾何学の文書ファイル本体
+
+% 作成したカスタムクラスファイルを指定
+\documentclass{myclass}
+
+% 作成したカスタムスタイルファイルを読み込み
+\usepackage{mystyle}
+
+% --- 文書情報 ---
+\title{代数幾何学}
+\author{Fefr}
+\date{\today}
+
+% ==================================================
+% --- コンパイル手順の注意 ---
+% この文書を正しくPDF化するには、複数回のコンパイルが必要です。
+% VScodeのlatex-workshopなどをお使いの場合、以下の順で実行されるレシピを作成してください。
+%
+% 1. ptex2pdf -l main.tex  (本文のコンパイル、.aux, .idx ファイルなどを生成)
+% 2. mendex -s myindex.ist main.idx (索引の作成、.idx -> .ind)
+% 3. pbibtex main (参考文献の処理、.aux -> .bbl)
+% 4. ptex2pdf -l main.tex  (索引と参考文献を本文に反映)
+% 5. ptex2pdf -l main.tex  (相互参照を確定させるため、もう一度実行)
+% ==================================================
+
+
+\setlength\parindent{0pt}
+
+\begin{document}
+
+% --- タイトルページ ---
+\maketitle
+
+% --- 目次 ---
+\tableofcontents
+
+% ==================================================
+% --- 前付 (まえがきなど) ---
+\frontmatter
+
+\chapter*{まえがき}
+本書は古典的な代数幾何について論ずる．主に\cite{Nakano}を参考にするつもりである．
+
+
+\cleardoublepage
+
+% ==================================================
+% --- 本文 ---
+\mainmatter
+\chapter{代数多様体}
+この章では代数幾何の対象である"代数多様体(algebraic variety)"を定義する．
+
+\section{アフィン空間}
+アフィン空間を復習する．\\
+\begin{definition}
+  $\A$を空でない集合．$V$を$\C$上の有限次元ベクトル空間とする．次の条件を満たす写像の族$\{T_v:\A \to \A :v\in V\}$が与えられているとき，組$(\A,V)$あるいは単に$\A$を\textbf{アフィン空間}\index{アフィンくうかん@アフィン空間}という．
+  \begin{enumerate}
+    \item 任意の$v,w\in V$に対して，$T_{v+w} = T_v \circ T_w$が成り立つ．
+    \item 任意の$P,Q\in \A$に対して，ただ一つの$v\in V$が存在して，$T_v(P) = Q$となる．
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  アフィン空間$\A$の次元はそれに伴うベクトル空間$V$の次元$\dim V$で定める．
+\end{definition}
+
+
+次は容易にわかる．
+
+\begin{proposition}
+  $(\A,V)$をアフィン空間とすると，次が成り立つ．
+  \begin{enumerate}
+    \item $0\in V$に対応する写像$T_0$は恒等写像$1_\A$である．
+    \item 任意の$v\in V$に対して，$T_v$は全単射．
+  \end{enumerate}
+\end{proposition}
+
+
+\begin{definition}
+  定義の2の$v$を$\overrightarrow{PQ}$とかく\footnote{従って，$-v$に対応するのは$\overrightarrow{QP}$である．}．また，$T_v(P)$を$P+v$とかく\footnote{イメージは$T_v$は$v$だけ平行移動を行う写像である．}．
+\end{definition}
+
+\begin{proposition}
+  $(\A,V)$をアフィン空間とすると，任意の$P,Q,R\in \A$に対して，次が成り立つ．
+  \begin{equation*}
+    \overrightarrow{PQ} + \overrightarrow{QR} = \overrightarrow{PR}
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  $Q = P + \overrightarrow{PQ}$，$R = Q + \overrightarrow{QR}$より，
+  \begin{equation*}
+    R = P + (\overrightarrow{PQ} + \overrightarrow{QR})
+  \end{equation*}
+  となる．一方，$R = P + \overrightarrow{PR}$であるから，$\overrightarrow{PR} = \overrightarrow{PQ} + \overrightarrow{QR}$が従う．
+\end{proof}
+
+有限次元ベクトル空間$V$に座標系$V \stackrel{\cong}{\longrightarrow} \C^n$を入れるように，アフィン空間にも座標系を入れることができる．
+
+\begin{definition}
+  $\A$をアフィン空間とし，$\A$の点$O$と$V$の基底$\{e_1,\cdots,e_n\}$をとる．$\A$の任意の点$P$
+  に対して，$\overrightarrow{OP}\in V$が定まり，$V$の基底を用いて，$\overrightarrow{OP} = \sum_i P_ie_i$とできる．このときの対応
+  \begin{equation*}
+    \begin{array}{rcl}
+      \A & \to & \C^n \\
+      P & \mapsto & (P_1,\cdots,P_n)
+    \end{array}
+  \end{equation*}
+  を$\A$の\textbf{(アフィン)座標系}\index{アフィンざひょうけい@アフィン座標系}といい，$(O;e_1,\cdots,e_n)$とかく\footnote{アフィン座標系$X:\A \to \C^n$は各$i$成分への射影$\pi_i$と合成し$X_i:=\pi_i \circ X:\A\to \C$が定義できることに注意する．}．
+\end{definition}
+
+\begin{remark}
+  座標系を導入することで$n$次元アフィン空間$\A$の点は$\C^n$の点と一対一に対応する．従って，誤解のおそれがない場合$\C^n$を$n$次元アフィン空間ということがある．
+\end{remark}
+
+
+\begin{proposition}
+  アフィン空間$\A$に対して，二つの異なる座標系$(O;e_1,\cdots,e_n)$，$(O';e_1',\cdots,e_n')$が与えられたとする．このとき，ある$A\in \GL(n,\C)$と$b\in \C^n$が存在して，任意の$P\in \A$に対して，
+  \begin{equation*}
+    \begin{pmatrix}
+      P_1' \\ \vdots \\ P_n'
+    \end{pmatrix}
+    =
+    A
+    \begin{pmatrix}
+      P_1 \\ \vdots \\ P_n
+    \end{pmatrix}
+    +
+    b
+  \end{equation*}
+  が成り立つ．
+\end{proposition}
+
+\begin{proof}
+  証明はベクトル空間における基底変換の議論と同様である．
+\end{proof}
+
+\begin{definition}
+  先程の命題における変換$P' = AP + b$を\textbf{アフィン変換}\index{アフィンへんかん@アフィン変換}という．
+\end{definition}
+
+
+
+\section{アフィン空間内の代数的集合}
+ここで，可微分多様体の定義を思い出すと，それは\\
+
+$\C$上の$n$次元アフィン空間を$\A$(または次元を明示して$\A^n$)とかく．
+一組のアフィン座標$X_1,\cdots,X_n$をとると，$\A$の点$p$は座標$(X_1(p),\cdots,X_n(p))$で表される．
+\begin{definition}
+  $f:\A \to \C$が\textbf{アフィン関数}\index{アフィンかんすう@アフィン関数}とは，多項式$F(X_1,\cdots,X_n)$があって，すべての$p\in \A$に対して，
+  \begin{equation*}
+    f(p) = F(X_1(p),\cdots,X_n(p))
+  \end{equation*}
+  となってるいるときを言う．アフィン関数という概念はアフィン座標の取り方によらず定まり，アフィン空間$\A$上のアフィン関数全体$\C[\A]$は$\C$上の可換環をなす．
+\end{definition}
+
+% ==================================================
+% --- 後付 (索引、参考文献) ---
+\backmatter
+
+% --- 索引の出力 ---
+\printindex
+
+% --- 参考文献の出力 ---
+% スタイルファイルはjunsrtを指定
+\bibliographystyle{junsrt-j}
+% .bibファイルを指定
+\bibliography{mybib}
+
+
+\end{document}
