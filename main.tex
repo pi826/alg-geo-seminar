@@ -151,8 +151,95 @@ $\C$上の$n$次元アフィン空間を$\A$(または次元を明示して$\A^n
   \begin{equation*}
     f(p) = F(X_1(p),\cdots,X_n(p))
   \end{equation*}
-  となってるいるときを言う．アフィン関数という概念はアフィン座標の取り方によらず定まり，アフィン空間$\A$上のアフィン関数全体$\C[\A]$は$\C$上の可換環をなす．
+  となってるいるときを言う．アフィン関数という概念はアフィン座標の取り方によらず定まる\footnote{つまり，アフィン変換で不変ということである．}．\\
+  $\A$上のアフィン関数全体$\C[\A]$は自然に環．さらに$\C$-代数になる．$f\mapsto F$という対応によって，同型
+  \begin{equation*}
+    \C[\A] \cong \C[X_1,\cdots,X_n]
+  \end{equation*}
+  が誘導される．$\A$に$\C[\A]$を付随させて考えるとき，代数多様体としてのアフィン空間という．以下この意味でアフィン空間という言葉を用いる．
 \end{definition}
+
+
+
+
+\begin{definition}
+  $\A$の部分集合$V$が\textbf{(アフィン)代数的集合}\index{アフィンだいすうてきしゅうごう@アフィン代数的集合}であるとは，$\C[\A]$の元$f_1,\cdots,f_r$
+  があって，
+  \begin{equation*}
+    V = \{p \in \A : f_1(p) = \cdots = f_r(p) = 0\}
+  \end{equation*}
+  となるときをいう．
+\end{definition}
+このとき，$V$は閉集合である．$\C[\A]$の関数の$V$への制限を$V$上のアフィン関数という．その全体$\C[V]$も同様に$\C$-代数となる．
+以降代数的集合$V$というときは，$\C[V]$を付随させて考えるものとする．\\
+制限写像
+\begin{equation*}
+  \C[\A] \to \C[V];f\mapsto f|_V
+\end{equation*}
+は$\C$-代数の準同型であり，その定め方から全射となる．その核を$I(V)$と書くことにすれば，
+\begin{align*}
+  &I(V) = \{f\in \C[\A] : f|_V = 0\}\\
+  &\C[V] \cong \C[\A]/I(V)
+\end{align*}
+となる．この$I(V)$を$V$の\textbf{定義イデアル}\index{ていぎイデアル@定義イデアル}という．\\
+次のことは基本的である．
+
+\begin{proposition}
+  $V_1,V_2$を代数的集合とすると，以下が成り立つ．
+  \begin{enumerate}
+    \item $V = \{p \in \A : \forall f \in I(V),f(p) = 0\}$
+    \item $V_1\subset V_2 \Leftrightarrow I(V_2)\subset I(V_1)$
+    \item $\C[\A]$の元$f$に対して，自然数$n$があって$f^n\in I(V)$ならば$f \in I(V)$となる\footnote{つまり，$\sqrt{I(V)} = I(V)$である．}．
+  \end{enumerate}
+\end{proposition}
+
+\begin{definition}
+  $\C[\A]$のイデアル$I$に対して，その\textbf{零点集合}\index{れいてんしゅうごう@零点集合}$V(I)$は次のように定義される．
+  \begin{equation*}
+    V(I) = \{p\in \A : \forall f \in I, f(p) = 0\}
+  \end{equation*}
+  先程の命題の1は$V=V(I(V))$とかける．
+\end{definition}
+
+\begin{proposition}
+  代数的集合の定義イデアルは有限個の素イデアルの共通部分である．逆に$\C[\A]$の素イデアルの共通部分はある代数的集合の定義イデアルである．
+\end{proposition}
+
+\begin{proof}
+  代数的集合$V$の定義イデアル$I(V)$は，ネーター環$\C[\A]$のイデアルだから，有限個の準素イデアルの共通部分として表される:
+  \begin{equation*}
+    I(V) = \mathfrak{q}_1\cap \cdots\cap \mathfrak{q}_r
+  \end{equation*}
+  $\mathfrak{q}_j$が準素イデアルなのでその根基$\sqrt{\mathfrak{q}_j}$は素イデアルで，$\mathfrak{q}_j\subset \sqrt{\mathfrak{q}_j}$なので
+  \begin{equation*}
+    I(V) \subset \sqrt{\mathfrak{q}_1}\cap \cdots \cap \sqrt{\mathfrak{q}_r}\qquad \cdots (*)
+  \end{equation*}
+  また，右辺の元$f$をとると，ある自然数$n_j$があって，$f^{n_j} \in \mathfrak{q}_j$であり，$n = \max_j n_j$とすると，
+  \begin{equation*}
+    f^n \in \mathfrak{q}_1\cap \cdots \cap \mathfrak{q}_r = I(V)
+  \end{equation*}
+  よって，$f\in I(V)$となり，$(*)$の等号が成り立つ．逆は読者に任せる．
+\end{proof}
+
+\begin{remark}
+  定義イデアル$I(V)$の素イデアルへの分解$I(V) = \bigcap_k \mathfrak{p}_k$の$\mathfrak{p}_i$は他の素イデアルとの包含関係がないとして取れる． 
+\end{remark}
+
+
+\section{アフィン代数多様体}
+
+\begin{definition}
+  アフィン空間$\A$内の代数的集合$V$が\textbf{既約}\index{きやく@既約}とは，任意の代数的集合$V_1,V_2$に対して$V = V_1\cup V_2$ならば$V=V_1$または$V=V_2$が成り立つときをいう．
+\end{definition}
+
+\begin{proposition}
+  $V$が既約$\Leftrightarrow$$I(V)$が素イデアル
+\end{proposition}
+\begin{proof}
+  $I(V) = \mathfrak{p}_1\cap \cdots \cap \mathfrak{p}_r$が$I(V)$の最短表示であって，$r\geq 2$とすると，
+\end{proof}
+
+
 
 % ==================================================
 % --- 後付 (索引、参考文献) ---
