@@ -222,7 +222,11 @@ $\C$上の$n$次元アフィン空間を$\A$(または次元を明示して$\A^n
 \end{proof}
 
 \begin{remark}
-  定義イデアル$I(V)$の素イデアルへの分解$I(V) = \bigcap_k \mathfrak{p}_k$の$\mathfrak{p}_i$は他の素イデアルとの包含関係がないとして取れる． 
+  定義イデアル$I(V)$の素イデアルへの分解$I(V) = \bigcap_k \mathfrak{p}_k$の$\mathfrak{p}_i$は他の素イデアルとの包含関係がないとして取れる． また，$\C[\A]$のネーター性から，任意のイデアル$I$に対してそれを含む極小素イデアルは有限個であり，
+  \begin{equation*}
+    \sqrt{I} = \bigcap_{\substack{I\subset \mathfrak{p} \\ \mathfrak{p}:\text{prime ideal}}} \mathfrak{p} = \bigcap_{\substack{I\subset \mathfrak{p} \\ \mathfrak{p}:\text{prime ideal} \\ \mathfrak{p}:\text{minimal}}} \mathfrak{p}
+  \end{equation*}
+  が成り立つことと，$\sqrt{I(V)} = I(V)$からその素イデアルへの分解はそれぞれ極小素イデアルへの分解として取れることがわかる．
 \end{remark}
 
 
@@ -255,21 +259,60 @@ $\C$上の$n$次元アフィン空間を$\A$(または次元を明示して$\A^n
   代数的集合$V$の中で包含関係で極大なアフィン代数多様体が存在する．
 \end{proposition}
 \begin{proof}
-  アフィン代数多様体の集合$\mathcal{V} = \{V' \subset V : V'  \text{ is affine algebraic variety}\}$をとると，$\varnothing \in \mathcal{V}$なので空ではなく，包含関係で半順序である．全順序部分集合$\{V_i\}_{i\in I}\subset \mathcal{V}$をとると，$V_{\infty} = \bigcup_{i\in I} V_i$は代数的集合であり，既約である．
+  アフィン代数多様体の集合$\mathscr{V} = \{V' \subset V : V'  \text{ is affine algebraic variety}\}$をとると，$\varnothing \in \mathscr{V}$なので空ではなく，包含関係で半順序である．全順序部分集合$\{V_i\}_{i\in I}\subset \mathscr{V}$をとると，$V_{\infty} = \bigcup_{i\in I} V_i$は代数的集合であり，既約である．
   実際，$V_{i} = V(I(V_{i}))$より$V_{\infty} = V(\bigcap_{i\in I}I(V_i))$であり，命題\ref{prop:1.2.5}から，$\bigcap_{i\in I}I(V_i)$は代数的集合の定義イデアルなので$V_{\infty}$は代数的集合である．
   既約であることは，$V_{\infty} = V_1 \cup V_2$なる代数的集合$V_1,V_2$で$V_1,V_2\neq V_{\infty}$なるものを取る．
   すると，$V_1\cup V_2 = V_{j}$なる$j\in I$が取れるが，$V_j$は既約なので$V_j = V_1$または$V_j = V_2$となり，すなわち，$V_{\infty} = V_1$または$V_{\infty} = V_2$となり矛盾である．
-  以上から$V_{\infty}\in \mathcal{V}$であるからZornの補題より，極大なアフィン代数多様体が存在する．
+  以上から$V_{\infty}\in \mathscr{V}$であるからZornの補題より，極大なアフィン代数多様体が存在する．
 \end{proof}
 
 \begin{remark}
-  先程の証明はそのまま一般的な場合でも同様な証明が回る．つまり，任意の位相空間には包含関係で極大な既約集合が存在する．また，このようなことを意識しなければ，極小素イデアルの存在から言える．(実際$\bigcap_{i\in I}I(V_i)$は素イデアルであることがわかるので命題\ref{prop:1.3.2}から$V_{\infty}$は既約であることがわかる．)
+  先程の証明はそのまま一般的な場合でも同様な証明が回る．つまり，任意の位相空間には包含関係で極大な既約集合が存在する．また，このようなことを意識しなければ，極小素イデアルの存在から言える．
+  (実際$\bigcap_{i\in I}I(V_i)$は素イデアルであることがわかるので命題\ref{prop:1.3.2}から$V_{\infty}$は既約であることがわかる．)
 \end{remark}
 
 \begin{definition}
-  代数的集合$V$の極大な既約代数的集合を$V$の\textbf{既約成分}\index{きやくせいぶん@既約成分}という．
+  代数的集合$V$の極大な既約代数的集合(つまりアフィン代数多様体)を$V$の\textbf{既約成分}\index{きやくせいぶん@既約成分}という．
 \end{definition}
 
+\begin{proposition}
+  代数的集合$V$は有限個の既約成分の和集合として一意的に表される．
+\end{proposition}
+\begin{proof}
+  まず，有限個であることを示す．有限個のアフィン代数多様体の和集合として表されない代数的集合が存在すると仮定し，それらの成す集合$\mathscr{V}$とする．
+  $\mathscr{V}$に対応するイデアルの集合を$\mathscr{I} = \{I(V) : V\in \mathscr{V}\}$とする．
+  $\C[\A]$はネーター環なので，$\mathscr{I}$は極大元$I_0$を持つ．$I_0 = I(V_0)$となる$V_0$をとると，$V_0$は$\mathscr{V}$の極小元となる．$V_0$は既約ではないので
+  \begin{equation*}
+    V_0 = V_1 \cup V_2
+  \end{equation*}
+  なる代数的集合$V_1,V_2 \subsetneq V_0$が取れる．すると，$V_1,V_2$は有限個の既約成分の和集合として表されるので，$V_0$も有限個の既約成分の和集合として表されることになり矛盾．\\
+  一意性を示す前に次の補題を示そう．
+  \begin{lemma}
+    代数的集合$V$が既約代数的集合$V_1,\cdots,V_r$の和集合で表され，かつ，それぞれの$V_i$は他のものとの包含関係を持たないとき，それぞれ$V_i$は既約成分である．
+  \end{lemma}
+  \begin{proof}
+    $V' \subset V$なる既約代数的集合$V'$をとると，ある$k$があって，$V'\subset V_k$が成り立つ．実際成り立たないとすると，任意の$i$に対して$V' \not\subset V_i$となり，$V'\cap V_i$は$V'$の真の代数的集合であるが，
+    \begin{equation*}
+      V' = \bigcup_{i = 1}^{r} (V' \cap V_i)
+    \end{equation*}
+    より，$V'$が既約であることに矛盾する．従って，ある$k$があって，$V'\subset V_k$が成り立つ．\\
+    以上より，$V_i\subsetneq V' \subset V$なる既約代数的集合$V'$が取れたとすると，$V'\subset V_k$なる$k$が
+    取れる．従って，
+    \begin{equation*}
+      V_i \subsetneq V' \subset V_k
+    \end{equation*}
+    となるが，仮定から$i = k$であり，これは矛盾である．
+  \end{proof}
+  上の補題から，$V= V_1\cup \cdots \cup V_r$でそれぞれ$V_i$が他のものとの包含関係を持たない既約代数的集合の場合に，
+  その表示の一意性を示せば良い．別の表示$V= W_1 \cup \cdots \cup W_s$があったとする．上の証明にもあったように，
+  任意の$k$に対してある$i$があって$W_k \subset V_i$だが，$W_k$は極大なので$W_k = V_i$となる．つまり，$s\leq r$
+  だが，同様にして$s \geq r$も成り立つ．よって，$W_k$は$V_i$を並び替えたものである．
+\end{proof}
+
+
+$V$の定義イデアルを$I(V) = \mathfrak{p}_1\cap \cdots \cap \mathfrak{p}_r$と最短表示すれば，
+$V = V(\mathfrak{p}_1)\cup \cdots \cup V(\mathfrak{p}_r)$であり，それぞれの$V(\mathfrak{p}_i)$は他のものの和集合に含まれない．
+従って，これら$V(\mathfrak{p}_1),\cdots,V(\mathfrak{p}_r)$は$V$の既約成分である．実際，$V(\mathfrak{p}_i)\subsetneq V' \subset V$なるアフィン代数多様体$V'$があれば，$\mathfrak{p}_i \supsetneq I(V') \supset I(V)$となり，$\mathfrak{p}_i \cap (\bigcap_{i\neq j}\mathfrak{p}_j) = I(V) \supsetneq I(V')\cap (\bigcap_{i\neq j}\mathfrak{p}_j)$だが
 
 % ==================================================
 % --- 後付 (索引、参考文献) ---

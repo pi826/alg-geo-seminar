@@ -9,6 +9,7 @@
 
 % --- パッケージの読み込み ---
 \RequirePackage{amsmath,amssymb,amsthm} % 数式、定理環境用
+\RequirePackage{mathrsfs}
 \RequirePackage[top=20mm, bottom=25mm, left=20mm, right=20mm]{geometry} % 余白設定
 \RequirePackage{fancyhdr} % ヘッダー・フッターのカスタマイズ
 
